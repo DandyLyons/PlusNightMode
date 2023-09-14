@@ -2,6 +2,8 @@
 
 PlusNightMode makes it easy for your app to add user-configurable light mode, dark mode, automatic (OS Setting), and night mode. It is designed to work with SwiftUI. 
 
+<img src="https://raw.githubusercontent.com/DandyLyons/PlusNightMode/main/README/Example.GIF">
+
 ## What is night mode? 
 
 It has long been known that exposure to light at night decreases our bodies' production of melatonin. In WWDC 23, Apple unveiled an innovative approach to tackling this problem, "Night Mode". It's a UI visual appearance that is "red-scale", meaning every single pixel on the screen is either black, or a shade of red. This is valuable for 2 main reasons. Overall less light is shown. Second, blue light (which has the most negative impact on melatonin production) is filtered out. However, currently, Apple's Night Mode is only available iOS 17's StandBy, and one single watch face. Now you can add night mode to your app with a few lines of code. 
@@ -77,7 +79,7 @@ struct ExampleView: View {
 
 We can only apply night mode to views within the SwiftUI View hierarchy. This does not include system views such as the status bar at the top of the screen. 
 
-Certain SwiftUI Views cannot be styled or overlayed. For example, when a user taps a SwiftUI `Menu`. 
+Certain SwiftUI Views cannot be styled or overlayed. For example, when a user taps a SwiftUI `Menu`. If you find an edge case or a workaround please open an Issue so that I can add it to this list of known limitations. 
 
 <img src="https://raw.githubusercontent.com/DandyLyons/PlusNightMode/main/README/Non-Night%20Mode%20Menu.jpeg"  width="200" >
 
@@ -86,3 +88,7 @@ Certain SwiftUI Views cannot be styled or overlayed. For example, when a user ta
 Be sure to test your design in all use cases. Some things to look out for: 
 
 - Night Mode will of course filter out blue light (that's the whole point of it). For this reason, blue elements can become invisible or difficult to see. 
+
+## Collaboration
+
+Please feel free to open a PR. 
