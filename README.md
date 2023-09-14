@@ -79,3 +79,10 @@ We can only apply night mode to views within the SwiftUI View hierarchy. This do
 
 Certain SwiftUI Views cannot be styled or overlayed. For example, when a user taps a SwiftUI `Menu`. 
 
+<img src="https://raw.githubusercontent.com/DandyLyons/PlusNightMode/main/README/Non-Night%20Mode%20Menu.jpeg"  width="200" >
+
+## Design Considerations
+
+Be sure to test your design in all use cases. Some things to look out for: 
+
+- Night Mode will of course filter out blue light (that's the whole point of it). For this reason, blue elements can become invisible or difficult to see. 
