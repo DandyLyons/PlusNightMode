@@ -19,4 +19,18 @@ extension View {
       self
     }
   }
+  
+  @ViewBuilder
+  public func observingNightMode(_ colorSchemeMode: ColorSchemeMode) -> some View {
+    if colorSchemeMode == .night {
+      self
+        .monochromed(color: .red, colorScheme: .dark)
+        .environment(\.colorSchemeMode, .constant(.night))
+//        .id(1)
+    } else {
+      self
+        .environment(\.colorSchemeMode, .constant(colorSchemeMode))
+//        .id(1)
+    }
+  }
 }

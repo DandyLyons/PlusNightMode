@@ -19,15 +19,32 @@ struct ExampleNightModeView: View {
           Text("Blue").foregroundStyle(.blue)
           Text("Green").foregroundStyle(.green)
           Text("Yellow").foregroundStyle(.yellow)
-          NavigationLink("Go to second page", value: "second page")
+          NavigationLink("Go to Settings", value: "Settings")
         }
         .navigationTitle("Hello World!")
         .navigationDestination(for: String.self) { string in
-          Text(string)
+          SettingsPage()
         }
       }
       .observingNightMode(true)
     }
+}
+
+struct SettingsPage: View {
+  @Environment(\.colorSchemeMode) var colorSchemeMode
+  
+  var body: some View {
+    Form {
+      Picker("Appearance", selection: colorSchemeMode) {
+        Text("Night").tag(ColorSchemeMode.night)
+        Text("Dark").tag(ColorSchemeMode.night)
+        Text("Light").tag(ColorSchemeMode.night)
+        Text("Auto").tag(ColorSchemeMode.night)
+      }
+      .pickerStyle(.segmented)
+    }
+    .navigationTitle("Settings")
+  }
 }
 
 //#Preview {
