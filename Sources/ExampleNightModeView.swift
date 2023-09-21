@@ -6,8 +6,8 @@
 
 import SwiftUI
 
-@available(iOS 16.0, *)
-struct NightModeView: View {
+@available(iOS 16.0, macOS 14.0, *)
+struct ExampleNightModeView: View {
     var body: some View {
       NavigationStack {
         List {
@@ -30,31 +30,12 @@ struct NightModeView: View {
     }
 }
 
-extension View {
-  @ViewBuilder
-  public func observingNightMode(_ bool: Bool) -> some View {
-    if bool {
-      self.monochromed(color: .red, colorScheme: .dark)
-    } else {
-      self
-    }
-  }
-  
-  public func monochromed(color: Color, colorScheme: ColorScheme = .dark) -> some View {
-    let filter: some View = color
-      .blendMode(.color)
-      .opacity(0.5)
-      .allowsHitTesting(false)
-    
-    return self
-      .preferredColorScheme(colorScheme)
-      .tint(color)
-      .overlay {
-        filter
-          .ignoresSafeArea()
-      }
-      .colorMultiply(color)
-  }
-}
+//#Preview {
+//  if #available(iOS 16.0, macOS 14.0, *) {
+//    ExampleNightModeView()
+//  } else if #available(iOS 13.0, macOS 10.15, *) {
+//    Text("Requires 16.0 or higher")
+//  }
+//}
 
 
