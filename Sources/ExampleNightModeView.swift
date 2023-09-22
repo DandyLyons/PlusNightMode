@@ -10,16 +10,20 @@ import Foundation
 
 
 @available(iOS 16.0, macOS 13.0, *)
-struct ExampleNightModeView: View {
+public struct ExampleNightModeView: View {
   static let night = Self(colorSchemeMode: .night)
   static let light = Self(colorSchemeMode: .light)
   static let auto = Self(colorSchemeMode: .auto)
   static let dark = Self(colorSchemeMode: .dark)
   
-  @State var colorSchemeMode: ColorSchemeMode = .night
+  public init(colorSchemeMode: ColorSchemeMode = .night) {
+    self.colorSchemeMode = colorSchemeMode
+  }
+  
+  @State public var colorSchemeMode: ColorSchemeMode = .night
   @Environment(\.colorScheme) var colorScheme
   
-  var body: some View {
+  public var body: some View {
     NavigationStack {
       List {
         Image("blindingWhite", bundle: .module)
@@ -56,13 +60,13 @@ struct ExampleNightModeView: View {
   }
 }
 
-struct SettingsPage: View {
-  @Environment(\.colorSchemeMode) var colorSchemeMode
+public struct SettingsPage: View {
+  @Environment(\.colorSchemeMode) private var colorSchemeMode
   
-  @Environment(\.colorScheme) var colorScheme
+  @Environment(\.colorScheme) private var colorScheme
   @State private var preferredColorScheme: ColorScheme = .light
   
-  var body: some View {
+  public var body: some View {
     Form {
       Picker("ColorScheme", selection: $preferredColorScheme) {
         Text("Dark").tag(ColorScheme.dark)
