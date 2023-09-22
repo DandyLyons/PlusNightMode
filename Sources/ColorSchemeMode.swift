@@ -1,47 +1,28 @@
 //
-//  ColorSchemeMode.swift
-//  GarageBuddy
+//  File.swift
+//  
 //
-//  Created by Daniel Lyons on 6/1/23.
+//  Created by Daniel Lyons on 9/22/23.
 //
 
 import Foundation
 import SwiftUI
 
-// Conform to EnvironmentKey
-public struct ColorSchemeModeBindingKey: EnvironmentKey {
-  public static var defaultValue: Binding<ColorSchemeMode> {
-    .constant(.auto)
-  }
-}
-
-
-
-// Conform to DynamicProperty to create a projected value
-extension EnvironmentValues {
-  var colorSchemeMode: Binding<ColorSchemeMode> {
-    get { self[ColorSchemeModeBindingKey.self] }
-    set { self[ColorSchemeModeBindingKey.self] = newValue }
-  }
-}
-
-public struct ColorSchemeMode: Identifiable, Hashable {
-  public static func == (lhs: ColorSchemeMode, rhs: ColorSchemeMode) -> Bool {
-    lhs.value == rhs.value
-  }
-  
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(value)
-  }
-  
+public struct ColorSchemeMode {
   @Binding var value: Value
   
-  public var id: String { self.value.rawValue }
+  public var resolvedColorScheme: ColorScheme? {
+    return value.resolvedColorScheme
+  }
   
-  static let auto: Self = .init(value: .constant(.auto))
-  static let light: Self = .init(value: .constant(.light))
-  static let dark: Self = .init(value: .constant(.dark))
-  static let night: Self = .init(value: .constant(.night))
+  public init(value: Binding<Value>) {
+    self._value = value
+  }
+  
+  public static let auto: Self = .init(value: .constant(.auto))
+  public static let light: Self = .init(value: .constant(.light))
+  public static let dark: Self = .init(value: .constant(.dark))
+  public static let night: Self = .init(value: .constant(.night))
   
   /// A wrapper enum that provides extra functionality to SwiftUI's `ColorScheme`
   ///
@@ -86,55 +67,3 @@ public struct ColorSchemeMode: Identifiable, Hashable {
     }
   }
 }
-//
-//
-//public struct ColorSchemeModeKey: EnvironmentKey {
-//  public static var defaultValue: ColorSchemeMode = .auto
-//}
-//
-//public extension ColorScheme {
-//  var opposite: Self {
-//    switch self {
-//      case .light: .dark
-//      case .dark: .light
-//      @unknown default: .dark
-//    }
-//  }
-//}
-//
-//// MARK: EnvironmentValues
-//extension EnvironmentValues {
-//  public var colorSchemeMode: ColorSchemeMode {
-//    get { self[ColorSchemeModeKey.self] }
-//    set { self[ColorSchemeModeKey.self] = newValue }
-//  }
-//}
-//
-// MARK: CustomDebugStringConvertible
-extension ColorSchemeMode: CustomDebugStringConvertible {
-  public var debugDescription: String {
-    return self.value.rawValue
-  }
-}
-//
-//
-//
-//public extension View {
-//  
-//  @ViewBuilder
-//  /// A convenience `View` that will adapt to the provided `ColorScheme`
-//  /// - Parameters:
-//  ///   - colorScheme: The SwiftUI `ColorScheme`
-//  ///   - light: The View to display when `colorScheme` is `.light`
-//  ///   - dark: The View to display when `colorScheme` is `.dark`
-//  /// - Returns: The Light and Dark View
-//  func view<L: View, D: View>(for colorScheme: ColorScheme, light: () -> L, dark: () -> D) -> some View {
-//    switch colorScheme {
-//      case .light: light()
-//      case .dark: dark()
-//      @unknown default: dark()
-//    }
-//  }
-//}
-
-

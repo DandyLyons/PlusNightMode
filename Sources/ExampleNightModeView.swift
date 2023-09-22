@@ -22,7 +22,6 @@ struct ExampleNightModeView: View {
   var body: some View {
     NavigationStack {
       List {
-//        Image(packageResource: "blindingWhite", ofType: "jpg")
         Image("blindingWhite", bundle: .module)
           .resizable()
           .frame(maxWidth: .infinity)
@@ -81,9 +80,7 @@ struct SettingsPage: View {
       
       
       Section {
-        Text("ColorScheme: \(colorScheme.debugDescription)")
-//        Text("ColorSchemeMode: \(colorSchemeMode.wrappedValue.debugDescription)")
-      }
+        Text("ColorScheme: \(colorScheme.debugDescription)")      }
     }
     .navigationTitle("Settings")
   }
