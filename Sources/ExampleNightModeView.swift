@@ -5,8 +5,12 @@
 //
 
 import SwiftUI
+import Foundation
 
 @available(iOS 16.0, macOS 14.0, *)
+
+
+@available(iOS 16.0, macOS 13.0, *)
 struct ExampleNightModeView: View {
     var body: some View {
       NavigationStack {
@@ -24,6 +28,10 @@ struct ExampleNightModeView: View {
         .navigationTitle("Hello World!")
         .navigationDestination(for: String.self) { string in
           SettingsPage()
+  static let night = Self(colorSchemeMode: .night)
+  static let light = Self(colorSchemeMode: .light)
+  static let auto = Self(colorSchemeMode: .auto)
+  static let dark = Self(colorSchemeMode: .dark)
         }
       }
       .observingNightMode(true)
@@ -55,4 +63,13 @@ struct SettingsPage: View {
 //  }
 //}
 
+#Preview("Light") {
+  ExampleNightModeView.light
+}
+#Preview("Dark") {
+  ExampleNightModeView.dark
+}
+#Preview("Auto") {
+  ExampleNightModeView.auto
+}
 
