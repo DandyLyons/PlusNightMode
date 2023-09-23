@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: EnvironmenValues
 extension EnvironmentValues {
-  var colorSchemeMode: Binding<ColorSchemeMode> {
+  public var colorSchemeMode: Binding<ColorSchemeMode> {
     get { self[ColorSchemeModeBindingKey.self] }
     set { self[ColorSchemeModeBindingKey.self] = newValue }
   }
@@ -70,3 +70,9 @@ extension ColorSchemeMode: Identifiable {
 }
 
 
+// MARK: LocalizedStringKey
+extension ColorSchemeMode {
+  public var localizedString: LocalizedStringKey {
+    return LocalizedStringKey(self.value.rawValue)
+  }
+}
