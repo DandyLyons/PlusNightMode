@@ -17,10 +17,10 @@ public struct ExampleNightModeView: View {
   static let dark = Self(colorSchemeMode: .dark)
   
   public init(colorSchemeMode: ColorSchemeMode = .night) {
-    self.colorSchemeMode = colorSchemeMode
+    self._colorSchemeMode = State(initialValue: colorSchemeMode)
   }
   
-  @State public var colorSchemeMode: ColorSchemeMode = .night
+  @State public var colorSchemeMode: ColorSchemeMode
   @Environment(\.colorScheme) var colorScheme
   
   public var body: some View {
