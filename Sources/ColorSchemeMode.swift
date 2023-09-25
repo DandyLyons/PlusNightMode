@@ -9,21 +9,17 @@ import Foundation
 import SwiftUI
 
 public struct ColorSchemeMode {
-  @Binding var value: Value
+  public var value: Value
+  
   
   public var resolvedColorScheme: ColorScheme? {
     return value.resolvedColorScheme
   }
   
-  public init(value: Binding<Value>) {
-    self._value = value
+  public init(value: Value) {
+    self.value = value
   }
-  
-  public static let auto: Self = .init(value: .constant(.auto))
-  public static let light: Self = .init(value: .constant(.light))
-  public static let dark: Self = .init(value: .constant(.dark))
-  public static let night: Self = .init(value: .constant(.night))
-  
+
   /// A wrapper enum that provides extra functionality to SwiftUI's `ColorScheme`
   ///
   /// To get the underlying `ColorScheme` value, use `resolvedColorScheme`

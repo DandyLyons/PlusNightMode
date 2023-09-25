@@ -34,6 +34,11 @@ extension ColorSchemeMode: CaseIterable {
   public static var allCases: [ColorSchemeMode] {
     [.auto, .dark, .light, .night]
   }
+  
+  public static let auto: Self = .init(value: .auto)
+  public static let light: Self = .init(value: .light)
+  public static let dark: Self = .init(value: .dark)
+  public static let night: Self = .init(value: .night)
 }
 
 // MARK: Codable
@@ -41,10 +46,12 @@ extension ColorSchemeMode: Codable {
   public enum CodingKeys: CodingKey { case value }
   
   public init(from decoder: Decoder) throws {
-    self.init(value: .constant(.auto))
     
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.value = try container.decode(Value.self, forKey: .value)
+    
+    let decodedValue = try container.decode(Value.self, forKey: .value)
+    
+    self.init(value: decodedValue)
   }
   
   public func encode(to encoder: Encoder) throws {

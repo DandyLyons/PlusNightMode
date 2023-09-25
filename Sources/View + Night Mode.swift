@@ -18,11 +18,12 @@ extension View {
   @ViewBuilder
   public func observingNightMode(_ colorSchemeMode: Binding<ColorSchemeMode>) -> some View {
     let bool = colorSchemeMode.wrappedValue == .night
-    @Environment(\.colorScheme) var colorScheme
+    
     
     nightModed(if: bool)
+      .preferredColorScheme(colorSchemeMode.wrappedValue.resolvedColorScheme)
       .environment(\.colorSchemeMode, colorSchemeMode)
-      .colorScheme(colorSchemeMode.wrappedValue.value.resolvedColorScheme ?? colorScheme)
+//      .colorScheme(colorSchemeMode.wrappedValue.value.resolvedColorScheme ?? colorScheme)
   }
   
   public func nightModed(if bool: Bool) -> some View {
