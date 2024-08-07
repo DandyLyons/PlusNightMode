@@ -21,7 +21,7 @@ let package = Package(
     .target(
       name: "PlusNightMode",
       resources: [
-        .process("Assets.xcassets")
+        .process("Resources/")
       ],
       swiftSettings: [.enableExperimentalFeature("StrictConcurrency")]
     ),

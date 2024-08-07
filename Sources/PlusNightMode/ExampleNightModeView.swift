@@ -8,15 +8,11 @@ import SwiftUI
 import Foundation
 
 
-
+/// An example `View` to demonstrate how ``colorSchemeMode(_:)`` affects appearance.
+///
+/// Also used in tests.
 @available(iOS 16.0, macOS 13.0, *)
-@MainActor // I added this explicitly to make the compiler happy, but it shouldn't be necessary since `View` is already `@MainActor` isolated
 public struct ExampleNightModeView: View {
-  static let night = Self(colorSchemeMode: .night)
-  static let light = Self(colorSchemeMode: .light)
-  static let auto = Self(colorSchemeMode: .auto)
-  static let dark = Self(colorSchemeMode: .dark)
-  
   public init(colorSchemeMode: ColorSchemeMode = .night) {
     self._colorSchemeMode = State(initialValue: colorSchemeMode)
   }
@@ -28,7 +24,8 @@ public struct ExampleNightModeView: View {
   public var body: some View {
     NavigationStack {
       List {
-        Image("blindingWhite", bundle: .module)
+//        Image("blindingWhite", bundle: .main)
+        Image(ImageResource(name: "blindingWhite", bundle: .module))
           .resizable()
           .frame(maxWidth: .infinity)
           .aspectRatio(1.0, contentMode: .fill)
@@ -55,14 +52,26 @@ public struct ExampleNightModeView: View {
       }
       .navigationTitle("Hello World!")
       .navigationDestination(for: String.self) { string in
-        SettingsPage()
+        ExampleSettingsView()
       }
     }
     .colorSchemeMode($colorSchemeMode)
   }
 }
 
-public struct SettingsPage: View {
+/// An example Settings screen `View` to demonstrate how ``colorSchemeMode(_:)`` affects appearance.
+///
+/// Also used in tests.
+@MainActor // This shouldn't be necessary post Xcode 16 since `View` will be `@MainActor` isolated
+extension ExampleNightModeView {
+  static let night = Self(colorSchemeMode: .night)
+  static let light = Self(colorSchemeMode: .light)
+  static let auto = Self(colorSchemeMode: .auto)
+  static let dark = Self(colorSchemeMode: .dark)
+}
+
+
+public struct ExampleSettingsView: View {
   @Environment(\.colorSchemeMode) private var colorSchemeMode
   
   @Environment(\.colorScheme) private var colorScheme

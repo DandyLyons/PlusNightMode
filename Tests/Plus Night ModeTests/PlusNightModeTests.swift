@@ -3,25 +3,18 @@ import XCTest
 import SnapshotTesting
 import SwiftUI
 
-#if canImport(UIKit)
-import UIKit
-#elseif canImport(AppKit)
-import AppKit
-#endif
-
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
 final class PlusNightModeTests: XCTestCase {
   @MainActor
   func testSnapshot() {
     isRecording = true
     var view = ExampleNightModeView.light
-    var hostingController = CrossPlatformHostingController(rootView: view)
+    var hostingController = UIHostingController(rootView: view)
     
-#if os(iOS)
     let screenBounds = UIScreen.main.bounds
-#elseif os(macOS)
-    let screenBounds = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1024, height: 768)
-#endif
-    
+
     hostingController.view.frame = screenBounds
     
     hostingController.rootView = ExampleNightModeView.night
@@ -41,10 +34,3 @@ final class PlusNightModeTests: XCTestCase {
     XCTFail("This snapshot does not look correct")
   }
 }
-
-#if os(iOS)
-typealias CrossPlatformHostingController = UIHostingController
-#elseif os(macOS)
-class CrossPlatformHostingController<Content: View>: NSHostingController<Content> {
-}
-#endif
