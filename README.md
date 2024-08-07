@@ -1,4 +1,6 @@
 # PlusNightMode
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FDandyLyons%2FPlusNightMode%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/DandyLyons/PlusNightMode)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FDandyLyons%2FPlusNightMode%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/DandyLyons/PlusNightMode)
 
 PlusNightMode makes it easy for your app to add user-configurable light mode, dark mode, automatic (OS Setting), and night mode. It is designed to work with SwiftUI. 
 
