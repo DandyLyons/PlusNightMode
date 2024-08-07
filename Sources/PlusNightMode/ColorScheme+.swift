@@ -1,19 +1,10 @@
-//
-//  File.swift
-//  
-//
-//  Created by Daniel Lyons on 9/22/23.
-//
-
 import SwiftUI
 
 extension ColorScheme: CustomDebugStringConvertible {
   public var debugDescription: String {
     switch self {
-      case .light:
-        ".light"
-      case .dark:
-        ".dark"
+      case .light: ".light"
+      case .dark: ".dark"
       @unknown default: "@unknown default"
     }
   }
@@ -30,14 +21,30 @@ public extension ColorScheme {
 }
 
 public extension View {
-  @ViewBuilder
-  /// A convenience `View` that will adapt to the provided `ColorScheme`
+  /// A convenience `View` that will override the light and dark appearance according to the provided `ColorScheme`
   /// - Parameters:
   ///   - colorScheme: The SwiftUI `ColorScheme`
   ///   - light: The View to display when `colorScheme` is `.light`
   ///   - dark: The View to display when `colorScheme` is `.dark`
   /// - Returns: The Light and Dark View
+  @ViewBuilder
   func view<L: View, D: View>(for colorScheme: ColorScheme, light: () -> L, dark: () -> D) -> some View {
+    switch colorScheme {
+      case .light: light()
+      case .dark: dark()
+      @unknown default: dark()
+    }
+  }
+  
+  /// A convenience `View` that will override the light and dark appearance.
+  /// - Parameters:
+  ///   - colorScheme: The SwiftUI `ColorScheme`
+  ///   - light: The View to display when `colorScheme` is `.light`
+  ///   - dark: The View to display when `colorScheme` is `.dark`
+  /// - Returns: The Light and Dark View
+  @ViewBuilder
+  func view<L: View, D: View>(@ViewBuilder light: () -> L, @ViewBuilder dark: () -> D) -> some View {
+    @Environment(\.colorScheme) var colorScheme
     switch colorScheme {
       case .light: light()
       case .dark: dark()
