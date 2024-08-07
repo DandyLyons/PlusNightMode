@@ -10,6 +10,7 @@ import Foundation
 
 
 @available(iOS 16.0, macOS 13.0, *)
+@MainActor // I added this explicitly to make the compiler happy, but it shouldn't be necessary since `View` is already `@MainActor` isolated
 public struct ExampleNightModeView: View {
   static let night = Self(colorSchemeMode: .night)
   static let light = Self(colorSchemeMode: .light)

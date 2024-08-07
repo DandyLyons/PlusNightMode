@@ -3,23 +3,48 @@ import XCTest
 import SnapshotTesting
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 final class PlusNightModeTests: XCTestCase {
+  @MainActor
   func testSnapshot() {
-//    isRecording = true
+    isRecording = true
     var view = ExampleNightModeView.light
-    var vc = UIHostingController(rootView: view)
-    vc.view.frame = UIScreen.main.bounds
-    vc.rootView = ExampleNightModeView.night
-    assertSnapshot(of: vc, as: .image(on: .iPhone13Pro), timeout: 0.5)
+    var hostingController = CrossPlatformHostingController(rootView: view)
     
-    vc.rootView = ExampleNightModeView.light
-    assertSnapshot(of: vc, as: .image(on: .iPhone13Pro), timeout: 0.5)
+#if os(iOS)
+    let screenBounds = UIScreen.main.bounds
+#elseif os(macOS)
+    let screenBounds = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1024, height: 768)
+#endif
     
-    vc.rootView = ExampleNightModeView.dark
-    assertSnapshot(of: vc, as: .image(on: .iPhone13Pro), timeout: 0.5)
+    hostingController.view.frame = screenBounds
     
-    vc.rootView = ExampleNightModeView.auto
-    assertSnapshot(of: vc, as: .image(on: .iPhone13Pro), timeout: 0.5)
+    hostingController.rootView = ExampleNightModeView.night
+    assertSnapshot(of: hostingController, as: .image, timeout: 0.5)
+    XCTFail("This snapshot does not look correct")
     
+    hostingController.rootView = ExampleNightModeView.light
+    assertSnapshot(of: hostingController, as: .image, timeout: 0.5)
+    XCTFail("This snapshot does not look correct")
+    
+    hostingController.rootView = ExampleNightModeView.dark
+    assertSnapshot(of: hostingController, as: .image, timeout: 0.5)
+    XCTFail("This snapshot does not look correct")
+    
+    hostingController.rootView = ExampleNightModeView.auto
+    assertSnapshot(of: hostingController, as: .image, timeout: 0.5)
+    XCTFail("This snapshot does not look correct")
   }
 }
+
+#if os(iOS)
+typealias CrossPlatformHostingController = UIHostingController
+#elseif os(macOS)
+class CrossPlatformHostingController<Content: View>: NSHostingController<Content> {
+}
+#endif

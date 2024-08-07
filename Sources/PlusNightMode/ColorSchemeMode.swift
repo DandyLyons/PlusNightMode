@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct ColorSchemeMode {
+public struct ColorSchemeMode: Sendable {
   public var value: Value
   
   
@@ -23,7 +23,7 @@ public struct ColorSchemeMode {
   /// A wrapper enum that provides extra functionality to SwiftUI's `ColorScheme`
   ///
   /// To get the underlying `ColorScheme` value, use `resolvedColorScheme`
-  public enum Value: String, CaseIterable, Hashable, Codable, Identifiable {
+  public enum Value: String, CaseIterable, Hashable, Codable, Identifiable, Sendable {
     /// Light Mode
     case light = "Light"
     /// Dark Mode
