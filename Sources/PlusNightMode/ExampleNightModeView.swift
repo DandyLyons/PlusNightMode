@@ -23,6 +23,7 @@ public struct ExampleNightModeView: View {
   
   @State public var colorSchemeMode: ColorSchemeMode
   @Environment(\.colorScheme) var colorScheme
+//  @Environment(\.shouldDifferentiateWithoutColor) var shouldDifferentiateWithoutColor
   
   public var body: some View {
     NavigationStack {
