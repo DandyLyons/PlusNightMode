@@ -7,13 +7,15 @@ PlusNightMode makes it easy for your app to add user-configurable light mode, da
 <img src="https://raw.githubusercontent.com/DandyLyons/PlusNightMode/main/README/Example.GIF">
 
 ## Sections
-- [What is night mode?](#what-is-night-mode)
-- [Usage](#usage)
-- [ColorSchemeMode](#colorschememode)
-- [Known Limitations](#known-limitations)
-- [Design Considerations](#design-considerations)
-- [Collaboration](#collaboration)
-- [Thank Yous](#thank-yous)
+- [PlusNightMode](#plusnightmode)
+  - [Sections](#sections)
+  - [What is night mode?](#what-is-night-mode)
+  - [Usage](#usage)
+    - [ColorSchemeMode](#colorschememode)
+  - [Known Limitations](#known-limitations)
+  - [Design Considerations](#design-considerations)
+  - [Collaboration](#collaboration)
+  - [Thank Yous](#thank-yous)
 
 ## What is night mode?
 
@@ -26,7 +28,7 @@ Simply add `.observingNightMode()` to the very top of your View hierarchy like s
 
 ```swift
 struct NightModeView: View {
-    @State private var isNightModeOn = true // 👈🏼
+    @Environment(\.colorSchemeMode) var colorSchemeMode // 👈🏼
 
     var body: some View {
       NavigationStack {
@@ -46,7 +48,7 @@ struct NightModeView: View {
           Text(string)
         }
       }
-      .observingNightMode(isNightModeOn) // 👈🏼
+      .colorSchemeMode($colorSchemeMode) // 👈🏼
     }
 }
 ```
@@ -56,7 +58,7 @@ Please note, presented views are not considered to be child views by SwiftUI. Th
 
 ```swift
 struct ExampleView: View {
-  @State private var isPresenting = false
+  @Environment(\.colorSchemeMode) var colorSchemeMode
 
   var body: some View {
     Button {
@@ -64,9 +66,10 @@ struct ExampleView: View {
     } label: {
       Text("Present Sheet View")
     }
+    .colorSchemeMode($colorSchemeMode)
     .sheet(isPresented: $isPresenting) {
       Text("Presented View")
-        .observingNightMode(true) 
+        .colorSchemeMode($colorSchemeMode)
         // 👆🏼 SwiftUI will not add Night Mode to 
         // presented views unless you explicitly add it
     }
@@ -97,6 +100,23 @@ struct ExampleView: View {
 - `light`: Light mode
 - `auto`: Automatically adjust to the device's current light/dark mode setting. 
 
+For a user-configurable `ColorSchemeMode` that you would like to keep in sync across the whole app, try using the EnvironmentValue: 
+```swift
+@Environment(\.colorSchemeMode) var colorSchemeMode
+// ... 
+MyView()
+  .colorSchemeMode($colorSchemeMode)
+``` 
+
+For a `ColorSchemeMode` that can be also persisted even after the app is closed try using `@AppStorage`: 
+```swift
+@AppStorage("colorSchemeMode") var colorSchemeMode
+
+MyView()
+  .colorSchemeMode($colorSchemeMode)
+```
+
+
 ## Known Limitations
 
 We can only apply night mode to views within the SwiftUI View hierarchy. This does not include system views such as the status bar at the top of the screen.
@@ -111,7 +131,7 @@ Be sure to test your design in all use cases. Some things to look out for:
 
 - Night Mode will of course filter out blue light (that's the whole point of it). For this reason, blue elements can become invisible or difficult to see.
 - Since Night Mode is monochrome, your UI cannot use color to communicate to the user. Therefore, it's recommended to:
-  - Add the SwiftUI enironment value [accessibilityDifferentiateWithoutColor](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitydifferentiatewithoutcolor) to tell all child views when they need to use shapes, rather than colors to communicate to the user. (In an upcoming release PlusNightMode will handle this automatically.)
+  - Add the SwiftUI environment value [accessibilityDifferentiateWithoutColor](https://developer.apple.com/documentation/swiftui/environmentvalues/accessibilitydifferentiatewithoutcolor) to tell all child views when they need to use shapes, rather than colors to communicate to the user. (In an upcoming release PlusNightMode will handle this automatically.) 
   - Add simple logic for child views to respect accessibilityDifferentiateWithoutColor. *Hacking with Swift* has a very helpful [tutorial](https://www.hackingwithswift.com/books/ios-swiftui/supporting-specific-accessibility-needs-with-swiftui) on this subject.
 
 ## Collaboration

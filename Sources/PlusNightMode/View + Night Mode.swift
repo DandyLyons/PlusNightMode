@@ -9,7 +9,7 @@ extension View {
   }
   
   @ViewBuilder
-  public func observingNightMode(_ colorSchemeMode: Binding<ColorSchemeMode>) -> some View {
+  func observingNightMode(_ colorSchemeMode: Binding<ColorSchemeMode>) -> some View {
     let bool = colorSchemeMode.wrappedValue == .night
     
     

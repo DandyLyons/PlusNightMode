@@ -11,7 +11,7 @@ import Foundation
 /// An example `View` to demonstrate how ``colorSchemeMode(_:)`` affects appearance.
 ///
 /// Also used in tests.
-@available(iOS 16.0, macOS 13.0, *)
+@available(iOS 16.0, macOS 14.0, *)
 public struct ExampleNightModeView: View {
   public init(colorSchemeMode: ColorSchemeMode = .night) {
     self._colorSchemeMode = State(initialValue: colorSchemeMode)

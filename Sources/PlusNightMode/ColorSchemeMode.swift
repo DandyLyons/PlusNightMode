@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+/// A wrapper type that provides extra functionality to SwiftUI's `ColorScheme`
+///
+/// To get the underlying `ColorScheme` value, use `resolvedColorScheme`
 public struct ColorSchemeMode: Sendable {
   public var value: Value
   
@@ -20,18 +23,16 @@ public struct ColorSchemeMode: Sendable {
     self.value = value
   }
 
-  /// A wrapper enum that provides extra functionality to SwiftUI's `ColorScheme`
-  ///
-  /// To get the underlying `ColorScheme` value, use `resolvedColorScheme`
+  /// The underlying value of the ``ColorSchemeMode``.
   public enum Value: String, CaseIterable, Hashable, Codable, Identifiable, Sendable {
     /// Light Mode
     case light = "Light"
     /// Dark Mode
     case dark = "Dark"
-    /// A View presentation designed to minimize negative impact to sleep where every
-    /// pixel is either pitch black or a shade of red.
+    /// A View presentation designed to minimize the negative impact of harmful sleep-depriving blue light.
+    /// This appearance effectively makes it so that every pixel is either pitch black or a shade of red.
     /// Note: Night Mode is not built into the system. Instead, you can observe the `\.colorSchemeMode`
-    /// EnvironmentKey and respond to it using `observingNightMode()`
+    /// EnvironmentKey and respond to it using `observingNightMode()` or `colorSchemeMode(_:)`
     case night = "Night"
     /// In this mode, the App will simply observe the Dark/Light mode setting of the device.
     case auto = "Automatic"

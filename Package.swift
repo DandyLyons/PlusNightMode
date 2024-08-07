@@ -13,15 +13,19 @@ let package = Package(
       targets: ["PlusNightMode"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.17.3")
+    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.17.3"),
+//    .package(url: "https://github.com/swiftlang/swift-docc.git", branch: "main"),
   ],
   targets: [
     // Targets are the basic building blocks of a package, defining a module or a test suite.
     // Targets can depend on other targets in this package and products from dependencies.
     .target(
       name: "PlusNightMode",
+      dependencies: [
+//        .product(name: "SwiftDocC", package: "swift-docc"),
+      ],
       resources: [
-        .process("Resources/")
+        .process("Resources/"),
       ],
       swiftSettings: [.enableExperimentalFeature("StrictConcurrency")]
     ),
