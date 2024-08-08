@@ -62,8 +62,9 @@ public struct ExampleNightModeView: View {
 /// An example Settings screen `View` to demonstrate how ``colorSchemeMode(_:)`` affects appearance.
 ///
 /// Also used in tests.
+@available(macOS 14.0, *)
 @MainActor // This shouldn't be necessary post Xcode 16 since `View` will be `@MainActor` isolated
-extension ExampleNightModeView {
+public extension ExampleNightModeView {
   static let night = Self(colorSchemeMode: .night)
   static let light = Self(colorSchemeMode: .light)
   static let auto = Self(colorSchemeMode: .auto)
@@ -101,16 +102,22 @@ public struct ExampleSettingsView: View {
   }
 }
 
+@available(macOS 14.0, *)
 #Preview("Night") {
   ExampleNightModeView.night
 }
 
+@available(macOS 14.0, *)
 #Preview("Light") {
   ExampleNightModeView.light
 }
+
+@available(macOS 14.0, *)
 #Preview("Dark") {
   ExampleNightModeView.dark
 }
+
+@available(macOS 14.0, *)
 #Preview("Auto") {
   ExampleNightModeView.auto
 }
