@@ -12,7 +12,7 @@ import Foundation
 ///
 /// Also used in tests.
 @available(iOS 17.0, macOS 14.0, *)
-public struct ExampleNightModeView: View {
+struct ExampleNightModeView: View {
   public init(colorSchemeMode: ColorSchemeMode = .night) {
     self._colorSchemeMode = State(initialValue: colorSchemeMode)
   }
@@ -64,7 +64,7 @@ public struct ExampleNightModeView: View {
 /// Also used in tests.
 @available(macOS 14.0, iOS 17.0, *)
 @MainActor // This shouldn't be necessary post Xcode 16 since `View` will be `@MainActor` isolated
-public extension ExampleNightModeView {
+extension ExampleNightModeView {
   static let night = Self(colorSchemeMode: .night)
   static let light = Self(colorSchemeMode: .light)
   static let auto = Self(colorSchemeMode: .auto)
@@ -96,7 +96,7 @@ public struct ExampleSettingsView: View {
       
       
       Section {
-        Text("ColorScheme: \(colorScheme.debugDescription)")      }
+        Text("ColorScheme: \(colorScheme.stringDescription)")      }
     }
     .navigationTitle("Settings")
   }
