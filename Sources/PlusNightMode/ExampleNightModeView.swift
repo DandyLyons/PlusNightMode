@@ -72,7 +72,7 @@ extension ExampleNightModeView {
 }
 
 
-public struct ExampleSettingsView: View {
+struct ExampleSettingsView: View {
   @Environment(\.colorSchemeMode) private var colorSchemeMode
   
   @Environment(\.colorScheme) private var colorScheme
