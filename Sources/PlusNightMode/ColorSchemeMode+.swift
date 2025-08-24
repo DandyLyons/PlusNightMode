@@ -15,9 +15,8 @@ public struct ColorSchemeModeBindingKey: EnvironmentKey {
   }
 }
 
-// MARK: CustomDebugStringConvertible
-extension ColorSchemeMode: CustomDebugStringConvertible {
-  public var debugDescription: String {
+extension ColorSchemeMode {
+  public var stringDescription: String {
     return self.value.rawValue
   }
 }

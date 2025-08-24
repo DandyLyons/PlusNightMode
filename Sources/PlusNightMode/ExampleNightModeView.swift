@@ -44,8 +44,8 @@ struct ExampleNightModeView: View {
           }
           .pickerStyle(.menu)
           
-          Text("ColorScheme: \(colorScheme.debugDescription)")
-          Text("ColorSchemeMode: \(colorSchemeMode.debugDescription)")
+          Text("ColorScheme: \(colorScheme.stringDescription)")
+          Text("ColorSchemeMode: \(colorSchemeMode.stringDescription)")
         }
         
         

@@ -1,7 +1,8 @@
 import SwiftUI
 
-extension ColorScheme: CustomDebugStringConvertible {
-  public var debugDescription: String {
+extension ColorScheme {
+  /// Like a "debugDescription" from `CustomDebugStringConvertible` but without the `@retroactive` protocol conformance.
+  public var stringDescription: String {
     switch self {
       case .light: ".light"
       case .dark: ".dark"
